@@ -40,6 +40,8 @@ All Version 1 requirements are implemented.
     - Shovel: breaks a wall temporarily
     - Fertile soil: every 25 moves a new fruit grows
 
+**Version 3** - few features tested
+
 #### File Structure
 
     Py_Game 
