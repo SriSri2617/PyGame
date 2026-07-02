@@ -1,0 +1,22 @@
+Name: Mathumitha Chandramohan
+
+GitHub repository link:
+https://github.com/SriSri2617/PyGame.git
+
+Comments:
+All Version 1 requirements are completed:
+- Center start position
+- WASD movement
+- Wall collision
+- Fruit worth 20 points
+- Inventory system
+- "i" command to print inventory
+- Lava floor (-1 per step)
+- Walls created using for-loops with no unreachable rooms
+
+Version 2 features implemented (optional):
+- Traps (-10 points)
+- Shovel (temporary wall breaking)
+
+README.md included with instructions.
+Project runs without errors.
