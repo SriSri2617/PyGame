@@ -14,9 +14,11 @@ All Version 1 requirements are completed:
 - Lava floor (-1 per step)
 - Walls created using for-loops with no unreachable rooms
 
-Version 2 features implemented (optional):
+Version 2 features implemented:
 - Traps (-10 points)
 - Shovel (temporary wall breaking)
+
+Version 3 TDD implemented
 
 README.md included with instructions.
 Project runs without errors.

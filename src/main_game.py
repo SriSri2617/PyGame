@@ -1,5 +1,5 @@
 import msvcrt
-from class_grid import Grid
+from src.class_grid import Grid
 
 g = Grid()
 
