@@ -45,6 +45,9 @@ open_wall = None
 # to count moves
 moves = 0
 
+# Grace steps for pickups(fruit, shovel)
+grace_steps = 0
+
 
 while True:
     g. print_grid()
@@ -78,8 +81,14 @@ while True:
     else:
         continue
 
-    # Shovel pickup
+    # Wall open after shovel pickup
     if grid[new_row][new_col] == "#":
+
+        # If a wall is already open, don't open another
+        if open_wall is not None and (new_row, new_col) != open_wall:
+            print("Move in through the opening before breaking another wall.")
+            continue
+
         if "shovel" in inventory:
             print("You used the shovel to break the wall!")
             inventory.remove("shovel")
@@ -97,12 +106,22 @@ while True:
     if grid[new_row][new_col] == "F":
         score += 20
         inventory.append("Fruit")
+
+        # Activate the grace steps
+        grace_steps = 5
+
         print("You collected a fruit! Score:", score)
+        print("Grace period activated! 5 free steps.")
+
 
     # Lava -1 points
     if grid[new_row][new_col] == "L":
-        score -= 1
-        print("Ouch! Lava -1 point. Score:", score)
+        if grace_steps > 0:
+            grace_steps -= 1
+            print(f"Grace step used! {grace_steps} remaining. No damage.")
+        else:
+            score -= 1
+            print("Ouch! Lava -1 point. Score:", score)
 
     # Trap lose 10 points
     if grid[new_row][new_col] == "T":
