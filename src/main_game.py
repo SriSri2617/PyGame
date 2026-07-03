@@ -22,8 +22,8 @@ g.add_shovels()
 grid = g.get_grid()
 
 # Add the player and starting from center of the grid
-rows = len(grid)
-cols = len(grid[0])
+rows = len(g.data)
+cols = len(g.data[0])
 
 # Finding the center
 player_row = rows // 2
@@ -89,7 +89,7 @@ while True:
             open_wall = (new_row, new_col)
 
             # Temporarily open the wall
-            grid[new_row][new_col] = "."
+            g.data[new_row][new_col] = "."
         else:
             continue
 
@@ -121,7 +121,6 @@ while True:
     player_row = new_row
     player_col = new_col
 
-    grid[player_row][player_col] = "@"
 
     #Every step lose -1 point
     score -= 1
@@ -133,7 +132,7 @@ while True:
 
         # Close if player is not on it
         if (player_row, player_col) != (r, c):
-            grid[r][c] = "#"
+            g.data[r][c] = "#"
             open_wall = None
 
     # Count for 25 moves

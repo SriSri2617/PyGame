@@ -53,7 +53,7 @@ class Grid:
 
     # get the grid
     def get_grid(self):
-        return self.grid
+        return self.data
 
     # add the fruit
     def add_fruit(self, row, col):
