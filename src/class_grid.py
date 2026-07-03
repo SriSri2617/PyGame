@@ -4,37 +4,52 @@ class Grid:
     def __init__(self, rows = 10, cols = 20):
         self.rows = rows
         self.cols = cols
-        self.grid = []
-
-        # gird filled with dots
-        for r in range(rows):
-            row = []
-            for c in range(cols):
-                row.append(".")
-            self.grid.append(row)
+        self.grid = [["." for c in range(cols)] for r in range(rows)]
+        self.data = [["." for c in range(cols)] for r in range(rows)]
 
     # create walls #
     def add_walls(self):
-        # Top border
+        # Col wall
         for c in range(self.cols):
-            self.grid[0][c] = "#"
+            self.data[0][c] = "#"
+            self.data[self.rows - 1][c] = "#"
 
-        # Bottom border
-        for c in range(self.cols):
-            self.grid[self.rows - 1][c] = "#"
-
-        # Left border
+        # Row wall
         for r in range(self.rows):
-            self.grid[r][0] = "#"
+            self.data[r][0] = "#"
+            self.data[r][self.cols - 1] = "#"
 
-        # Right border
-        for r in range(self.rows):
-            self.grid[r][self.cols - 1] = "#"
+        # New interior walls using for-loops
+        # Custom horizontal wall
+        for c in range(3, 5):
+            self.data[3][c] = "#"
+
+        # Custom vertical wall
+        for r in range(5, 6):
+            self.data[r][5] = "#"
+
+    def add_shovels(self):
+        # Shovel 1
+        for c in range(2, 3):
+            if self.data[6][c] == ".":
+                self.data[6][c] = "S"
+
+        # Shovel 2
+        for r in range(3, 4):
+            if self.data[r][14] == ".":
+                self.data[r][14] = "S"
 
     # print the grid
-    def print_grid(self):
-        for row in self.grid:
-            print("".join(row))
+    def print_grid(self, player_row, player_col):
+        for r in range(self.rows):
+            row_str = ""
+            for c in range(self.cols):
+                if r == player_row and c == player_col:
+                    row_str += "@"
+                else:
+                    row_str += self.data[r][c]
+            print(row_str)
+
 
     # get the grid
     def get_grid(self):
@@ -43,21 +58,21 @@ class Grid:
     # add the fruit
     def add_fruit(self, row, col):
         # Only place fruit if it's not a wall
-        if self.grid[row][col] == ".":
-            self.grid[row][col] = "F"
+        if self.data[row][col] == ".":
+            self.data[row][col] = "F"
 
     # add the lava
     def add_lava(self, row, col):
-        if self.grid[row][col] == ".":
-            self.grid[row][col] = "L"
+        if self.data[row][col] == ".":
+            self.data[row][col] = "L"
 
 
     # add the trap
     def add_trap(self, row, col):
-        if self.grid[row][col] == ".":
-            self.grid[row][col] = "T"
+        if self.data[row][col] == ".":
+            self.data[row][col] = "T"
 
     # add a shovel
     def add_shovel(self, row, col):
-        if self.grid[row][col] == ".":
-            self.grid[row][col] = "S"
+        if self.data[row][col] == ".":
+            self.data[row][col] = "S"

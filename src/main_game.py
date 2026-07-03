@@ -11,31 +11,23 @@ g.add_fruit(1, 6)
 g.add_fruit(4, 10)
 g.add_fruit(7, 12)
 
-# Place lava inside the box
-g.add_lava(3, 5)
-g.add_lava(6, 10)
-g.add_lava(4, 7)
-
 # Place traps
 g.add_trap(3, 8)
 g.add_trap(6, 4)
 
-# Place shovel
-g.add_shovel(5, 5)
+# addd shovel
+g.add_shovels()
 
 # get the grid
 grid = g.get_grid()
 
-# Add the player and strating from center of the grid
+# Add the player and starting from center of the grid
 rows = len(grid)
 cols = len(grid[0])
 
 # Finding the center
 player_row = rows // 2
 player_col = cols // 2
-
-# positioning the player
-grid[player_row][player_col] = "@"
 
 # score and inventory
 score = 0
@@ -50,7 +42,7 @@ grace_steps = 0
 
 
 while True:
-    g. print_grid()
+    g.print_grid(player_row, player_col)
     print("Move (WASD, Q to quit): ")
 
     cmd = msvcrt.getch().decode().lower()
@@ -82,7 +74,7 @@ while True:
         continue
 
     # Wall open after shovel pickup
-    if grid[new_row][new_col] == "#":
+    if g.data[new_row][new_col] == "#":
 
         # If a wall is already open, don't open another
         if open_wall is not None and (new_row, new_col) != open_wall:
@@ -103,7 +95,7 @@ while True:
 
 
     # Fruit collection
-    if grid[new_row][new_col] == "F":
+    if g.data[new_row][new_col] == "F":
         score += 20
         inventory.append("Fruit")
 
@@ -114,33 +106,26 @@ while True:
         print("Grace period activated! 5 free steps.")
 
 
-    # Lava -1 points
-    if grid[new_row][new_col] == "L":
-        if grace_steps > 0:
-            grace_steps -= 1
-            print(f"Grace step used! {grace_steps} remaining. No damage.")
-        else:
-            score -= 1
-            print("Ouch! Lava -1 point. Score:", score)
-
     # Trap lose 10 points
-    if grid[new_row][new_col] == "T":
+    if g.data[new_row][new_col] == "T":
         score -= 10
         print("You stepped on a trap! -10 points. Score:", score)
 
     # Shovel pickup
-    if grid[new_row][new_col] == "S":
+    if g.data[new_row][new_col] == "S":
         inventory.append("shovel")
         print("You picked up a shovel!")
 
-    # Remove old player
-    grid[player_row][player_col] = "."
 
     # Update to new position
     player_row = new_row
     player_col = new_col
 
     grid[player_row][player_col] = "@"
+
+    #Every step lose -1 point
+    score -= 1
+    print("Step cost: -1 point. Score:", score)
 
     # Close the wall
     if open_wall is not None:
@@ -158,17 +143,10 @@ while True:
     if moves % 25 == 0:
         for r in range(rows):
             for c in range(cols):
-                if grid[r][c] == ".":
-                    grid[r][c] = "F"
+                if g.data[r][c] == ".":
+                    g.data[r][c] = "F"
                     print("A new fruit has grown on the fertile soil!")
                     break
             else:
                 continue
             break
-
-
-
-
-
-
-
