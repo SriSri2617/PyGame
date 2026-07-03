@@ -101,10 +101,7 @@ while True:
 
         # Activate the grace steps
         grace_steps = 5
-
-        print("You collected a fruit! Score:", score)
         print("Grace period activated! 5 free steps.")
-
 
     # Trap lose 10 points
     if g.data[new_row][new_col] == "T":
@@ -123,8 +120,12 @@ while True:
 
 
     #Every step lose -1 point
-    score -= 1
-    print("Step cost: -1 point. Score:", score)
+    if grace_steps > 0:
+        grace_steps -= 1
+        print(f"Grace period activated! 5 free steps.{grace_steps}")
+    else:
+        score -= 1
+        print("Step cost: -1 point. Score:", score)
 
     # Close the wall
     if open_wall is not None:

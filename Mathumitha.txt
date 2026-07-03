@@ -12,13 +12,33 @@ All Version 1 requirements are completed:
 - Inventory system
 - "i" command to print inventory
 - Lava floor (-1 per step)
-- Walls created using for-loops with no unreachable rooms
+- Walls created using for-loops with no unreachable rooms 
 
 Version 2 features implemented:
-- Traps (-10 points)
+- Traps (-10 points) - Fixed ( Hope fixed correctly)
 - Shovel (temporary wall breaking)
 
 Version 3 TDD implemented
 
 README.md included with instructions.
 Project runs without errors.
+
+___________________________________________________________________________
+
+Fixes based on feedback
+____________________________________________________________________________
+
+I continued in the same project and tried to fix the requirements.
+
+G. The floor is lava - for every step you take you lose 1 point.
+	Fixed: The player now loses 1 point for EVERY movement.	No special floor tile is used anymore.
+
+H. Use for loops to create multiple, contiguous walls on the map. Make sure that no rooms are created that cannot be entered. Do this in the grid.py file.
+	Fixed: Added new interior walls created with for-loops. No unreachable rooms exist.
+
+I. Traps - introduce any trap to the game board. If you step on a square with a trap, you lose 10 points. The trap should remain so that you can fall into it multiple times.
+	For this, I tried to fix the issue by separating DATA (what is actually on the tile) from PRESENTATION (what is drawn). This makes the trap stay on the board permanently instead of 	being consumed by the player.
+
+O. Grace period - after you have picked something up, you can walk 5 steps without any points being deducted.
+	The grace period gives 5 free steps. The feedback for G said that every step must always lose 1 point, so I made sure the grace period temporarily stops the -1 penalty for exactly 	5 steps and then returns to normal scoring.
+
